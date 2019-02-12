@@ -418,6 +418,10 @@ $('#has-many-{$this->column}').on('click', '.remove', function () {
     $(this).closest('.has-many-{$this->column}-form').find('.$removeClass').val(1);
 });
 
+$('.form-horizontal').submit(function(){
+	$("template").remove();
+});
+
 EOT;
 
         Admin::script($script);
