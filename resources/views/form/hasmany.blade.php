@@ -1,10 +1,8 @@
 
 <div class="row">
-    <div class="{{$viewClass['label']}}"><h4 class="pull-right">{{ $label }}</h4></div>
-    <div class="{{$viewClass['field']}}"></div>
+    <div class="text-center"><h4>{{ $label }}</h4></div>
 </div>
-
-<hr style="margin-top: 0px;">
+<hr/>
 
 <div id="has-many-{{$column}}" class="has-many-{{$column}}">
 
@@ -12,7 +10,7 @@
 
         @foreach($forms as $pk => $form)
 
-            <div class="has-many-{{$column}}-form fields-group">
+            <div class="has-many-{{$column}}-form fields-group" style="background:#fafafa;border:1px #ddd solid; border-radius: 10px;padding: 15px 0; margin-bottom: 15px">
 
                 @foreach($form->fields() as $field)
                     {!! $field->render() !!}
@@ -24,15 +22,13 @@
                         <div class="remove btn btn-warning btn-sm pull-right"><i class="fa fa-trash">&nbsp;</i>{{ trans('admin.remove') }}</div>
                     </div>
                 </div>
-
-                <hr>
             </div>
 
         @endforeach
     </div>
 
     <template class="{{$column}}-tpl">
-        <div class="has-many-{{$column}}-form fields-group">
+        <div class="has-many-{{$column}}-form fields-group" style="background:#fafafa;border:1px #ddd solid; border-radius: 10px;padding: 15px 0; margin-bottom: 15px">
 
             {!! $template !!}
 
@@ -42,7 +38,6 @@
                     <div class="remove btn btn-warning btn-sm pull-right"><i class="fa fa-trash"></i>&nbsp;{{ trans('admin.remove') }}</div>
                 </div>
             </div>
-            <hr>
         </div>
     </template>
 
