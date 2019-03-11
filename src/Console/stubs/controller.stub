@@ -15,8 +15,10 @@ class DummyClass extends Controller
 {
     use ModelForm;
 
+    var $pageTitle = 'TITLE'; //功能标题
+
     /**
-     * Index interface.
+     * 内容列表页
      *
      * @return Content
      */
@@ -24,15 +26,15 @@ class DummyClass extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header($this->pageTitle);
+            $content->description('列表');
 
             $content->body($this->grid());
         });
     }
 
     /**
-     * Edit interface.
+     * 编辑内容页
      *
      * @param $id
      * @return Content
@@ -41,15 +43,15 @@ class DummyClass extends Controller
     {
         return Admin::content(function (Content $content) use ($id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header($this->pageTitle);
+            $content->description('编辑');
 
-            $content->body($this->form()->edit($id));
+            $content->body($this->form($id));
         });
     }
 
     /**
-     * Create interface.
+     * 新增内容页
      *
      * @return Content
      */
@@ -57,42 +59,51 @@ class DummyClass extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header($this->pageTitle);
+            $content->description('新增');
 
             $content->body($this->form());
         });
     }
 
     /**
-     * Make a grid builder.
-     *
+     * 列表表格
      * @return Grid
      */
-    protected function grid()
-    {
-        return Admin::grid(DummyModel::class, function (Grid $grid) {
+    protected function grid(){
+        return Admin::grid(UserPrize::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
+            //$grid->name('名称');
+            //$grid->title('标题');
+            //TODO: add more
 
-            $grid->created_at();
-            $grid->updated_at();
+            $grid->created_at('添加时间');
+            $grid->status('启用状态')->switch();
         });
     }
 
     /**
-     * Make a form builder.
-     *
+     * Form表单
+     * @param int $id 被编辑的内容编号,为null则新增
      * @return Form
      */
-    protected function form()
+    protected function form($id=null)
     {
-        return Admin::form(DummyModel::class, function (Form $form) {
+        $form = Admin::form(DummyModel::class, function (Form $form) {
 
-            $form->display('id', 'ID');
+            $form->tab('基本信息', function(Form $form){
 
-            $form->display('created_at', 'Created At');
-            $form->display('updated_at', 'Updated At');
+                //$form->text('name', '名称');
+                //$form->text('title', '标题');
+                //TODO: add more
+
+                $form->switch('status','启用状态');
+            });
+
         });
+
+        if ($id) $form->edit($id);
+        return $form;
     }
 }

@@ -67,8 +67,8 @@ class MakeCommand extends GeneratorCommand
         $stub = parent::replaceClass($stub, $name);
 
         return str_replace(
-            ['DummyModelNamespace', 'DummyModel'],
-            [$this->option('model'), class_basename($this->option('model'))],
+            ['DummyModelNamespace', 'DummyModel', 'TITLE'],
+            [$this->option('model'), class_basename($this->option('model')), $this->option('title')],
             $stub
         );
     }
@@ -125,6 +125,7 @@ class MakeCommand extends GeneratorCommand
         return [
             ['model', null, InputOption::VALUE_REQUIRED,
                 'The eloquent model that should be use as controller data source.', ],
+            ['title', null, InputOption::VALUE_REQUIRED, '标题'],
         ];
     }
 }
