@@ -6,3 +6,4 @@ composer.lock
 *.project
 .idea/
 .php_cs.cache
+/AdminLTE-2.3.2

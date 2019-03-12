@@ -40,15 +40,19 @@
 
                             <p>
                                 {{ Admin::user()->name }}
-                                <small>Member since admin {{ Admin::user()->created_at }}</small>
+                                {{--<small>Member since admin {{ Admin::user()->created_at }}</small>--}}
                             </p>
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{ admin_url('auth/setting') }}" class="btn btn-default btn-flat">{{ trans('admin.setting') }}</a>
+                                <a href="{{ admin_url('auth/setting') }}" class="btn btn-info">
+                                    <i class="glyphicon glyphicon-cog"></i>
+                                    {{ trans('admin.setting') }}</a>
                             </div>
                             <div class="pull-right">
-                                <a href="{{ admin_url('auth/logout') }}" class="btn btn-default btn-flat">{{ trans('admin.logout') }}</a>
+                                <a href="{{ admin_url('auth/logout') }}" class="btn btn-danger">
+                                    <i class="glyphicon glyphicon-log-out"></i>
+                                    {{ trans('admin.logout') }}</a>
                             </div>
                         </li>
                     </ul>
